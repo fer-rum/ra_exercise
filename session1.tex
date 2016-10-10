@@ -1,0 +1,346 @@
+\documentclass[11pt]{tudbeamer}
+\usetheme{Luebeck}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{gensymb}
+\usepackage{default}
+\usepackage{ngerman}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+
+% insert frame number
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill%
+\insertframenumber\,/\,\inserttotalframenumber}
+
+% Metadata
+\title{Rechnerarchitektur 2016}
+\subtitle{Session 1}
+
+\author{Fredo Erxleben}
+
+\begin{document}
+  \maketitle
+
+\begin{frame}{Organisational Matters}
+
+	\begin{tabular}{ll}
+		\textbf{Lecture Coordinator}	&\\
+		Dr.-Ing. Thomas B. Preußer	& thomas.preusser@tu-dresden.de\\
+		\\
+		\textbf{Tutor}				&\\
+		Bakk.-Inf. Fredo Erxleben	& fredo.erxleben@tu-dresden.de\\
+		\\
+		\textbf{Office}				& APB 1095\\
+		\textbf{Phone}				& +49 351/ 463-38456\\
+	\end{tabular}
+
+\end{frame}
+
+\begin{frame}{Today}
+
+	Learn about:
+	\begin{itemize}
+		\item Basics concepts of representing numbers in different forms
+		\item The relations between these representations
+		\item How to convert numbers from one systems into another 
+	\end{itemize}
+
+\end{frame}
+
+\section{Exercise 1}
+
+\begin{frame}{Exercise 1.1}
+
+	\begin{block}{Definition: Alphabet}
+		An alphabet is a \textbf{finite set} of symbols.
+	\end{block}
+	
+	According to \textit{DIN 43300} it also has a total order.
+	
+	\begin{block}{In math:}
+		$\Sigma = \lbrace \sigma_0 \dots \sigma_n \rbrace$
+		where $\sigma_0 \dots \sigma_n$ are symbols
+	\end{block}
+	
+	Also: $|\Sigma|$ is the number of symbols in the alphabet $\Sigma$.
+
+\end{frame}
+
+\begin{frame}{Exercise 1.2}
+
+	\begin{block}{Definition: Code}
+		A code is the rule describing how information is represented using an alphabet.
+	\end{block}
+	
+	c.f.: Lecture \textit{Informations- und Kodierungstheorie}
+	
+	\begin{block}{Definition: Code density}
+		Assume a code with
+		\begin{itemize}
+			\item Code word length $n$
+			\item Encoding $q$ different units of information
+			\item Using an alphabet $\Sigma$
+		\end{itemize}
+		
+		If $$|\Sigma|^{n-1} < q \leq |\Sigma|^n$$ is true, the code is called \textbf{dense}.
+	\end{block}
+
+\end{frame}
+
+\begin{frame}{Exercise 1.3}
+
+	\begin{block}{Definition: Code table}
+		A Code table is the assignment of different encodings to the same information, usually in the form of a table. (Duh!)
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}{Exercise 1.4}
+	
+	\begin{block}{Definition: Binary code}
+		Each code with $|\Sigma| = 2$ is a binary code.
+	\end{block}
+	
+	Often $\Sigma = \lbrace 0, 1 \rbrace$ is used.
+
+\end{frame}
+
+\begin{frame}{BCD code}
+	\centering
+	
+	BCD = Binary coded decimal
+	\begin{itemize}
+		\item Binary code
+		\item Each code word represents a decimal number
+		\item In the \textbf{dense} BCD code, each code word has length 4 (\textit{tetrade})
+	\end{itemize}
+	
+	\begin{tabular}{rc|rc}
+		\textbf{Decimal}	& \textbf{Tetrade} & \textbf{Decimal} & \textbf{Tetrade} \\
+		0 & 0000 & 5 & 0101 \\
+		1 & 0001 & 6 & 0110 \\
+		2 & 0010 & 7 & 0111 \\
+		3 & 0011 & 8 & 1000 \\
+		4 & 0100 & 9 & 1001 \\
+	\end{tabular}
+	
+	The tetrades \textit{0101} to \textit{1111} are unused. (\textit{pseudo-tetrades})
+
+\end{frame}
+
+\begin{frame}{1-of-n code}
+\centering
+
+	\begin{itemize}
+		\item Also called 1-hot code
+		\item All code words have the same length
+		\item Each code word contains only one \textit{1}
+		\item Often used in state automata ($\rightarrow$ Exercise 7 ff.)
+	\end{itemize}
+	
+	Let's say we have four states $Z_0 \dots Z_3$ we want to encode:
+	
+	\begin{tabular}{rc}
+		\textbf{State} & \textbf{Encoding} \\
+		$Z_0$ & 0001 \\
+		$Z_1$ & 0010 \\
+		$Z_2$ & 0100 \\
+		$Z_3$ & 1000 \\
+	\end{tabular}
+	
+	\textbf{Caution:} \textit{0000} is not a code word in a 1-of-n code.
+
+\end{frame}
+
+\begin{frame}{ASCII}
+
+	ASCII = American Standard Code for Information Interchange (aka. ANSI X3.4-1986)
+	
+	\begin{itemize}
+		\item 7-bit binary code
+		\item Contains printable and non-printable characters
+		\item Contained as sub-code in nearly any 8-bit character set
+		\begin{itemize}
+			\item As well as in Unicode
+			\item Exception: EBCDIC
+		\end{itemize}
+	\end{itemize}
+	
+	Code table and details $\rightarrow$ https://\textbf{en}.wikipedia.org/wiki/ASCII
+
+\end{frame}
+
+\begin{frame}{UTF-8}
+
+	\begin{itemize}
+		\item Around since 1993, latest revision 2003 (UTF-16 compatibility)
+		\item Variable code word length (8 \dots 32 bit)
+		\item \textit{Prefix property} allows for error checking and stream decoding
+		\begin{itemize}
+			\item No code word is the prefix of another code word
+		\end{itemize}
+	\end{itemize}
+	
+	Code table and details $\rightarrow$ https://\textbf{en}.wikipedia.org/wiki/UTF-8
+
+\end{frame}
+
+\begin{frame}{Exercise 1.5}
+\centering
+
+	Smallest unit of information is 1 \textbf{bit} ( = Binary Digit)
+	
+	\begin{tabular}{ll}
+		Byte 	& = 8 bit (usually\dots) \\
+		Nibble 	& = $\frac{1}{2}$ byte (aka. Half-byte) \\
+	\end{tabular}
+	\vspace{1em}\\
+		A machine \textbf{word} is the bit-size used natively by an architecture \\
+		(Or programming language). \\
+		Except at Intel\texttrademark \dots
+	
+	\begin{block}{Intel\texttrademark says}
+		1 word = 16 bit, no matter the architecture
+	\end{block}
+	
+	\textbf{Conclusion:} RTFM.
+
+\end{frame}
+
+\section{Exercise 2}
+
+\begin{frame}[allowframebreaks]{Exercise 2.1}
+
+	\begin{tabular}{lrl}
+		\textbf{System} & \textbf{Base} & $\Sigma$ \\
+		Dual & 2 			& $\lbrace 0,1 \rbrace$\\
+		Octal & 8 			& $\lbrace 0,1,2,3,4,5,6,7 \rbrace$\\
+		Decimal & 10 		& $\lbrace 0\dots9 \rbrace$\\
+		Hexadecimal & 16 	& $\lbrace 0 \dots 9, A \dots F \rbrace$\\
+		Sexagesimal & 60 	& lol, nope \\
+	\end{tabular}
+
+\framebreak
+
+	\begin{block}{The simple approach}
+		\begin{enumerate}
+			\item Find the next smallest power of the \textit{base of the target system}.
+			\item Subtract it from your current number.
+			\item If you have not reached 0, repeat from step 1.
+			\item Add up all the subtracted powers of the base system according to the formula on the slides
+		\end{enumerate}
+	\end{block}
+	
+	Example $\rightarrow$ blackboard
+
+\framebreak
+\centering
+
+	Powers of 2 cheat sheet
+	\vspace{1em}
+	
+	\begin{tabular}{rr|rr}
+	x & $2^x$ & x & $2^x$ \\
+	\hline
+	0 & 1 & 		8 & 256 \\
+	1 & 2 & 		9 & 512 \\
+	2 & 4 & 		10 & 1024 \\
+	3 & 8 &  	11 & 2048 \\
+	4 & 16 & 	12 & 4096 \\
+	5 & 32 & 	13 & 8192 \\
+	6 & 64 &  	14 & 16384\\
+	7 & 128 &	15 & 32768 \\
+	\end{tabular}
+
+\framebreak
+
+	\begin{block}{Alternative approach}
+		\begin{description}
+			\item[\textbf{Whole part}] Iterative division (with remainder) by target base in original system
+			\item[\textbf{Fractional part}] Iterative multiplication with target base in original system
+		\end{description}
+	\end{block}
+	
+	Example $\rightarrow$ blackboard
+
+\end{frame}
+
+\begin{frame}{Exercise 2.2}
+
+	Formation of triades (octal) or tetrades (hexadecimal) that can be transcoced independently.\\
+	Example $\rightarrow$ blackboard
+
+\end{frame}
+
+\begin{frame}{Exercise 2.3 and 2.4}
+	\centering
+	
+	Your turn\dots (aka. homework)
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Exercise 2.5}
+
+	For a given value to be converted from $B_0$ to $B_1$
+	let $n_i$ be the number of digits of the values representation in $B_i$.
+	To retain precision, $B^{n_0}_0 = B^{n_1}_1$ must be true. Ergo:
+	
+	\begin{align}
+		B^{n_0}_0 = B^{n_1}_1 \\
+		n_0 \cdot \log B_0 = n_1 \cdot \log B_1 \\
+		n_1 = \frac{\log B0}{\log B_1} \cdot n_0
+	\end{align}
+
+\framebreak
+
+	\centering
+	A few examples
+	\vspace{1em}
+	
+	\begin{tabular}{r|llll}
+		$B_0 \setminus B_1$ & 2 & 8 & 10 & 16 \\
+		\hline
+		2 	& 1 			& 0,333\dots	& 0,301\dots	& 0,25 \\
+		8	& 3			& 1			& 0,903\dots	& 0,75 \\
+		10	& 3,322\dots	& 1,107\dots	& 1			& 0,830\dots \\
+		16	& 4			& 1,333\dots	& 1,204\dots	& 1 \\
+	\end{tabular}
+
+\framebreak
+	
+	\begin{block}{Example: octal to decimal}
+		Assume an octal number has 12 digits.
+		$$\frac{\log 8}{\log 10} \cdot 12 = 0,903 \cdot 12 = 10.836$$
+		It therefore needs 11 digits in decimal.
+	\end{block}
+
+\end{frame}
+
+\section{Wrapping up}
+
+\begin{frame}{Last slide (finally)}
+
+	Homework:
+	\begin{itemize}
+		\item Exercise 2.3
+		\item Exercise 2.4
+		\item Exercise 2.6
+		\item Learn the powers of 2\dots
+	\end{itemize}
+	\vspace{1em}
+	
+	Next session we talk about
+	\begin{itemize}
+		\item Negative numbers
+		\item Floating point numbers
+	\end{itemize} 
+	\vspace{1em}
+	\textbf{Also:} Question time!
+
+\end{frame}
+
+\end{document}
