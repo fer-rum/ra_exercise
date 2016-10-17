@@ -1,0 +1,195 @@
+\documentclass[11pt]{tudbeamer}
+\usetheme{Luebeck}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{gensymb}
+\usepackage{default}
+\usepackage{ngerman}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+
+% insert frame number
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill%
+\insertframenumber\,/\,\inserttotalframenumber}
+
+% Metadata
+\title{Rechnerarchitektur 2016}
+\subtitle{Session 2}
+
+\author{Fredo Erxleben}
+
+\begin{document}
+  \maketitle
+
+\begin{frame}{Today}
+
+	Learn about:
+	\begin{itemize}
+		\item Representing negative numbers
+		\item Floating point numbers
+	\end{itemize}
+
+\end{frame}
+
+\section{Exercise 1}
+\section{Exercise 2}
+\begin{frame}[allowframebreaks]{Exercise 2.7}
+
+	Option 1: Sign-Value-Representation \\
+	Encode the sign in a defined bit (Usually the upper one)\\
+	\textbf{Problem: Two representations for $0$}
+	
+\framebreak
+
+	Option 2: Defining a Bias $K$ \\
+	$$Z = \left( \sum_{i=0}^{n-1} B^i \cdot z_i \right) - K$$
+	
+\framebreak
+
+	Option 3: Interpret numbers with the set upper bit at position $n-1$ as negative. \\
+	\begin{itemize}
+		\item (B-1)-Complement
+		\item B-Complement
+	\end{itemize}
+
+\framebreak
+
+	Option 3a: (B-1)-Complement (For $B=2$: One-Complement)\\
+	$$-Z = B^n-1-Z$$ \\
+	Arithmetic calculations are done in the ring $Z_{B^n - 1}$ e.g. $mod \, B^n - 1$ \\
+	\textbf{Problem: Two representations for $0$}
+	
+\framebreak
+
+	Option 3b: B-Complement (For $B=2$: Two-Complement) \\
+	$$-Z = B^n-Z$$ \\
+	Arithmetic calculations are done in the ring $Z_{B^n}$ e.g. $mod \, B^n$
+	
+\framebreak
+
+	A handy trick: If you already have the (B-1)-Complement you can easily calculate the b-Complement and vice versa. \\
+
+	\begin{align}
+	-Z &= B^n - Z \\
+	&= (B^n-1-Z) + 1
+	\end{align}
+	
+	For $B=2$ the term in parenthesis becomes a bitwise negative.	
+
+\end{frame}
+
+\begin{frame}{Exercise 2.8}
+
+	If there is no carry into the leading digit, a $0$ becomes $B-1$ \\
+	$\Rightarrow$ A positive number becomes negative 
+
+	Example $\rightarrow$ blackboard \\
+	Rest is homework.
+
+\end{frame}
+
+\begin{frame}{Exercise 2.9 and 2.10}
+
+	One example $\rightarrow$ blackboard \\
+	Rest is homework.
+
+\end{frame}
+
+\section{Exercise 3}
+
+\begin{frame}[allowframebreaks]{Exercise 3.1}
+
+	How to create a IEEE 754-conform floating point number:
+
+	\begin{enumerate}
+		\item Determine the sign
+		\item Convert the absolute value into a dual number
+		\item Normalise the converted absolute value
+		\item Determine the characteristic
+		\item Combine the parts into a complete number
+	\end{enumerate}
+
+\framebreak
+
+	Example $\rightarrow$ blackboard \\
+	
+	\begin{block}{Caution!}
+	If $c < 1$, use the denormalized form.\\
+	If $c \geq 2B+1$, encode the overflow using $\pm\infty$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Exercise 3.2}
+
+	Biggest possible (absolute) value:
+	
+	\begin{itemize}
+		\item Sign does not matter
+		\item Biggest normalized characteristic $\hat{c}=254_{10}$
+		\item Biggest mantissa $\hat{M} = 1.11\dots1_2$ 
+	\end{itemize}
+	
+	\begin{align}
+	\hat{Z}	&= \pm\hat{M} 					\cdot 2^{\hat{c}-B} \\
+			&= \pm\left( 2 - 2^{-23}\right) 	\cdot 2^{127} \\
+			&= \pm\left(2^{128} - 2^{104}\right)
+	\end{align}
+
+	Binary version $\rightarrow$ blackboard
+	
+\framebreak
+
+	Smallest possible (absolute) value:
+	
+	\begin{itemize}
+		\item Sign does not matter
+		\item Smallest denormalized characteristic $\breve{c}=0$
+		\item Smallest mantissa $\breve{M} = 0.00\dots01_2$ 
+	\end{itemize}
+	
+	\begin{align}
+	\breve{Z}	&= \pm\breve{M} 				\cdot 2^{1-B} \\
+				&= \pm\left(2^{-23}\right) 	\cdot 2^{-126} \\
+				&= \pm 2^{-149}
+	\end{align}
+
+	Binary version $\rightarrow$ blackboard
+
+\end{frame}
+
+\begin{frame}{Exercise 3.3 and 3.4}
+
+	Exercise 3.3 is homework\dots \\
+	The calculation parts in 3.4 you can do already, the questions require some pondering.
+
+\end{frame}
+
+\section{Wrapping up}
+
+\begin{frame}{Last slide (finally)}
+
+	Homework:
+	\begin{itemize}
+		\item Finish exercise 2.8, 2.9 and 2.10
+		\item Exercise 3.3
+		\item Prepare exercise 3.4
+	\end{itemize}
+	\vspace{1em}
+	
+	Next session we talk about
+	\begin{itemize}
+		\item Basic arithmetic operations on IEEE 754 floating point numbers\dots
+		\item Basic arithmetic operations on fixed-point numbers\dots
+		\item \dots and their properties and caveats
+	\end{itemize} 
+	\vspace{1em}
+	\textbf{Also:} Question time!
+
+\end{frame}
+
+\end{document}
