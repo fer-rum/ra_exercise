@@ -1,0 +1,109 @@
+\documentclass[11pt]{tudbeamer}
+\usetheme{Luebeck}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{gensymb}
+\usepackage{default}
+\usepackage{ngerman}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+
+% insert frame number
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill%
+\insertframenumber\,/\,\inserttotalframenumber}
+
+% Metadata
+\title{Rechnerarchitektur 2016}
+\subtitle{Session 3}
+
+\author{Fredo Erxleben}
+
+\begin{document}
+  \maketitle
+
+\begin{frame}{Organizational}
+
+	Next Monday is a holiday.
+	Please do 3.11 - 3.16 at home or go to the exercises on
+
+	\begin{tabular}{lcc}
+		Tuesday, 	&1st slot, &APB E023\\
+		Thursday, 	&1st slot, &APB E010\\
+		Friday, 		&1st slot, &APB E006\\
+	\end{tabular}
+
+\end{frame}
+
+\begin{frame}{Today}
+
+	\begin{itemize}
+		\item Basic arithmetic operations on IEEE 754 floating point numbers\dots
+		\item Basic arithmetic operations on fixed-point numbers\dots
+		\item \dots and their properties and caveats
+	\end{itemize} 
+
+\end{frame}
+
+\section{Exercise 1}
+\section{Exercise 2}
+\section{Exercise 3}
+
+\begin{frame}[allowframebreaks]{Exercise 3.5}
+
+	Addition and Subtraction:\\
+
+	\begin{itemize}
+		\item Equalize exponents (only the difference of the exponents is relevant)
+		\item Add / subtract mantissas as usual
+		\item Normalize if required
+	\end{itemize}
+
+\framebreak
+
+	Multiplication and Division: \\
+	$\rightarrow$ Blackboard
+\end{frame}
+
+\begin{frame}{Exercise 3.6}
+
+	Use denormalized form:
+	$$Z = (-1)^v \cdot 0.f\, \cdot \, 2^{1-B}$$
+
+\end{frame}
+
+\begin{frame}{Exercise 3.7 - 3.10}
+	
+	3.7 $\rightarrow$ Blackboard\\
+	3.8 $\rightarrow$ Blackboard, Homework\\
+	3.9 $\rightarrow$ Homework\\
+	3.10 $\rightarrow$ Blackboard
+
+\end{frame}
+
+\section{Wrapping up}
+
+\begin{frame}{Last slide (finally)}
+
+	Homework:
+	\begin{itemize}
+		\item Finish exercise 3.8
+		\item Exercise 3.9
+		\item Exercise 3.11 to 3.16
+	\end{itemize}
+	\vspace{1em}
+	
+	Next session we talk about
+	\begin{itemize}
+		\item Boolean logic
+		\item Basic boolean circuit elements
+	\end{itemize} 
+	\vspace{1em}
+	\textbf{Also:} Question time!
+
+\end{frame}
+
+\end{document}
