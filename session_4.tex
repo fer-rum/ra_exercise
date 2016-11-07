@@ -1,0 +1,115 @@
+\documentclass[11pt]{tudbeamer}
+\usetheme{Luebeck}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{gensymb}
+\usepackage{default}
+\usepackage{ngerman}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+
+% insert frame number
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+      \insertshorttitle\hfill%
+\insertframenumber\,/\,\inserttotalframenumber}
+
+% Metadata
+\title{Rechnerarchitektur 2016}
+\subtitle{Session 4}
+
+\author{Fredo Erxleben}
+
+\begin{document}
+  \maketitle
+
+\begin{frame}{Today}
+
+	Learn about:
+	\begin{itemize}
+		\item Boolean algebra
+		\item Boolean logic circuitry
+	\end{itemize}
+
+\end{frame}
+
+\section{Exercise 1}
+\section{Exercise 2}
+\section{Exercise 3}
+\section{Exercise 4}
+
+\begin{frame}[allowframebreaks]{Exercise 4.1}
+	A truth table with 2 variables has $2^2 = 4$ rows. \\
+	This results in $2^4 = 16$ possible result combinations.
+	
+\framebreak
+
+	\begin{tabular}{lccl}
+	$x_1$ 	& 1100 &&\\
+	$x_0$ 	& 1010 &&\\
+	\hline
+			& 0000 & $f_0 = 0$ & Constant 0 \\
+			& 0001 & $f_1 = x_1 x_0$ & Conjunction (AND) \\
+			& 0010 & $f_2 = x_1 \bar{x_0}$ & Inhibition \\
+			& \dots &&\\
+	\end{tabular}	
+	
+\end{frame}
+
+\begin{frame}{Exercise 4.2}
+
+	\begin{itemize}
+		\item Law of commutation
+		\item Law of association
+		\item Law of distribution
+		\item Law of absorption
+		\item Neutral element
+		\item Complementary element
+		\item DeMorgan's Laws
+	\end{itemize}
+	
+	\begin{block}{Principle of duality}
+		Negating each literal and switching of conjunction and disjunction yields the inverse of the original equation.
+	\end{block}
+
+\end{frame}
+
+\begin{frame}{Exercise 4.3 \dots 4.7}
+
+	$\rightarrow$ Blackboard
+
+\end{frame}
+
+\begin{frame}{Exercise 4.8}
+
+	Two possible approaches:\\
+	\begin{itemize}
+		\item Algebraic simulation of the circuit (yields truth table)
+		\item Symbolic calculation of the equation (yields logic formula)
+	\end{itemize}
+	Both solutions must yield the same result and can be transformed into one another.
+
+\end{frame}
+
+\section{Wrapping up}
+
+\begin{frame}{Last slide (finally)}
+
+	(What do we say to the god of) Homework:
+	\begin{itemize}
+		\item Not today
+	\end{itemize}
+	\vspace{1em}
+	
+	Next session we talk about
+	\begin{itemize}
+		\item More about logic circuit design
+	\end{itemize} 
+	\vspace{1em}
+	\textbf{Also:} Question time!
+
+\end{frame}
+
+\end{document}
